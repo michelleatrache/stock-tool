@@ -1,26 +1,33 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService }      from '../user.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
   balance: number;
-  updateAmount: number = 0;;
+  updateAmount: number = 0;
 
-  constructor() { 
-    this.balance = 0;
+  constructor(private userService: UserService) { 
   }
 
   ngOnInit() {
+    this.updateBalance();
+  }
+
+  updateBalance(){
+    this.balance = this.userService.getBalance();
   }
 
   addBalance(){
-    this.balance = this.balance + this.updateAmount;
+    this.userService.add(this.updateAmount);
+    this.updateBalance();
   }
 
   subtractBalance(){
     this.balance = this.balance - this.updateAmount;
+    this.updateBalance();
   }
 }
