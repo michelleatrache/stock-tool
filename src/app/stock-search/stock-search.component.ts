@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService }      from '../user.service';
+import { StockService }      from '../stock.service';
 
 @Component({
   selector: 'app-stock-search',
@@ -8,8 +9,9 @@ import { UserService }      from '../user.service';
 })
 export class StockSearchComponent {
   balance: number;
+  x: string;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private stockService: StockService) { }
 
   ngOnInit() {
     this.updateBalance();
@@ -18,5 +20,18 @@ export class StockSearchComponent {
   updateBalance(){
     this.balance = this.userService.getBalance();
   }
+
+  search(stock_id){
+    console.log(stock_id);
+  //  this.stockService.getStockPrice(stock_id);
+
+  this.stockService.getStockPrice(stock_id).subscribe(
+    data=>{
+      this.x = JSON.stringify(data);
+      console.log(this.x);
+    }
+  );
+  }
+  
 
 }

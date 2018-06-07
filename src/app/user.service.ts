@@ -11,7 +11,6 @@ export class UserService {
     if(isNaN(this.balance)){
       this.balance = 0;
     }
-
   }
 
 
