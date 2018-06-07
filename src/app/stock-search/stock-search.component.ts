@@ -28,7 +28,16 @@ export class StockSearchComponent {
   this.stockService.getStockPrice(stock_id).subscribe(
     data=>{
       this.x = JSON.stringify(data);
-      console.log(this.x);
+     // console.log(data);
+
+      let obj = JSON.parse(this.x);
+
+      let stockPrice = obj.dataset_data.data[0][1];
+      console.log(obj);
+      console.log("stockPrice: " + stockPrice);
+
+      
+      // Call function on data to parse the JSON
     }
   );
   }

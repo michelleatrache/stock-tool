@@ -20,6 +20,7 @@ export class StockService {
 
     /** GET heroes from the server */
     getStockPrice (stockId): Observable<Stock[]> {
+      console.log("getStockPrice() called");
            let URL = "https://www.quandl.com/api/v3/datasets/WIKI/" + stockId 
      + "/data.json?column_index=4&rows=1&" + this.api_key;
       return this.http.get<Stock[]>(URL)
