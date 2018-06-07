@@ -1,0 +1,22 @@
+.list-group li {
+    list-style-type: none;
+    border-bottom: 3px solid gray;
+    border-left: 3px solid gray;
+    border-right: 3px solid gray;
+    margin-top: 5px;
+    width:250px;
+    height: 25px;
+    padding: 4px;
+    background-color: #c3c7c6;
+    cursor: pointer;
+}
+
+.search-result li:hover {
+    background-color: #607D8B;
+  }
+  
+  .search-result li a {
+    color: #888;
+    display: block;
+    text-decoration: none;
+  }

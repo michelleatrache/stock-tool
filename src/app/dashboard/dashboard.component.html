@@ -1,10 +1,11 @@
-<h3>Your cash balance: {{this.balance}}</h3>
+<h3>Your cash balance: ${{this.balance}}</h3>
 <input type="number" [(ngModel)]='this.updateAmount'/>
 <button (click)="addBalance()">Add to Balance</button>
 <button (click)="subtractBalance()">Subtract from Balance</button>
 
-<ul class="stocks">
+<ul class="list-group">
+    <div [hidden]="this.ownedStocks == null">Your owned stocks:</div>
     <li *ngFor="let stock of this.ownedStocks">
-        <span class="label label-primary">{{stock.id}}</span>
+        <span class="list-group-item">{{stock.id}} with {{stock.amountOwned}} shares at ${{stock.price}} a share</span>
     </li>
 </ul>

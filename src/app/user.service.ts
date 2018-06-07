@@ -10,7 +10,7 @@ export class UserService {
 
   constructor() {
     this.balance = parseInt(localStorage.getItem('balance'));
-    this.ownedStocks = JSON.parse(localStorage.getItem('ownedStocks'));
+    this.ownedStocks = JSON.parse(localStorage.getItem('ownedStocks') || '[]');
     if(this.ownedStocks == null){
       this.ownedStocks = [];
     }
@@ -33,7 +33,7 @@ export class UserService {
   }
 
   saveOwnedStocks(){
-    localStorage.setItem("ownedStocks", JSON.stringify(this.ownedStocks))
+    localStorage.setItem('ownedStocks', JSON.stringify(this.ownedStocks));
   }
  
   add(val) {
@@ -56,7 +56,7 @@ export class UserService {
       let boughtStock = new Stock(stock_id, stock_price, num_stocks);
       console.log(boughtStock);
       this.ownedStocks.push(boughtStock);
-     // this.saveOwnedStocks();
+      this.saveOwnedStocks();
     }
   }
 }

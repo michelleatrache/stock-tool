@@ -11,6 +11,7 @@ import { Stock } from '../stock';
 })
 export class StockService {
 
+  // Quandl API key
   api_key = "CCE3RKDibsEi3Uix1-9R"
 
   constructor(private http: HttpClient) { }
@@ -31,17 +32,17 @@ export class StockService {
     }
 
      /**
-   * Handle Http operation that failed.
-   * Let the app continue.
+   * Handle failed HTTP operation
+   * Let the app continue despite this
    * @param operation - name of the operation that failed
    * @param result - optional value to return as the observable result
    */
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
-      // TODO: send the error to remote logging infrastructure
-      console.error(error.status); // log to console instead
+      console.error(error.status); // log to console
 
+      // Send alert on known error messages
       if(error.status == "404"){
         alert("This search returned no results. Please double check your input.");
       }
@@ -50,7 +51,7 @@ export class StockService {
         alert("ERROR 429: There are too many requests being sent to the server.");
       }
 
-      // Let the app keep running by returning an empty result.
+      // Let the app keep running by returning an empty result
       return of(result as T);
     };
   }
