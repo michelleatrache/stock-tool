@@ -6,19 +6,30 @@ import { Injectable } from '@angular/core';
 export class UserService {
   public balance = 0;
 
-  constructor() { 
+  constructor() {
+    this.balance = parseInt(localStorage.getItem('balance'));
+    if(isNaN(this.balance)){
+      this.balance = 0;
+    }
+
   }
 
 
   getBalance() {
     return this.balance;
   }
+
+  saveBalance(){
+    localStorage.setItem('balance', String(this.balance));
+  }
  
   add(val) {
     this.balance = this.balance + val;
+    this.saveBalance();
   }
   
   subtract(val) {
     this.balance = this.balance - val;
+    this.saveBalance();
   }
 }

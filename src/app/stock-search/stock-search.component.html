@@ -3,12 +3,5 @@
   <h3>Stock Search</h3>
 
   <input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
-
-  <ul class="search-result">
-    <li *ngFor="let hero of heroes$ | async" >
-      <a routerLink="/detail/{{hero.id}}">
-        {{hero.name}}
-      </a>
-    </li>
-  </ul>
+  <button (click)="search(searchBox.value)">Search</button>
 </div>
