@@ -50,15 +50,11 @@ export class StockService {
         alert("ERROR 429: There are too many requests being sent to the server.");
       }
 
-      // TODO: better job of transforming error for user consumption
-     // this.log(`${operation} failed: ${error.message}`);
-
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
   }
 
-    /** Log a HeroService message with the MessageService */
     private log(message: string) {
       console.log(message);
     }

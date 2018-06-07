@@ -2,3 +2,9 @@
 <input type="number" [(ngModel)]='this.updateAmount'/>
 <button (click)="addBalance()">Add to Balance</button>
 <button (click)="subtractBalance()">Subtract from Balance</button>
+
+<ul class="stocks">
+    <li *ngFor="let stock of this.ownedStocks">
+        <span class="label label-primary">{{stock.id}}</span>
+    </li>
+</ul>
