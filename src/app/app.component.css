@@ -1,13 +1,14 @@
 nav a {
-    padding: 5px 10px;
+    padding: 7px 12px;
     text-decoration: none;
     margin-top: 10px;
+    margin-left: 10px;
     display: inline-block;
     background-color: #eee;
     border-radius: 4px;
   }
   nav a:visited, a:link {
-    color: #607D8B;
+    color: #4283a3;
   }
   nav a:hover {
     color: #039be5;

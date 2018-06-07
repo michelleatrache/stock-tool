@@ -16,13 +16,13 @@ export class StockService {
   constructor(private http: HttpClient) { }
 
     // To get most recent stock price
-  //https://www.quandl.com/api/v3/datasets/WIKI/FB/data.json?column_index=4&rows=1
+  //https://www.quandl.com/api/v3/datasets/WIKI/FB/data.json?column_index=4&rows=1&api_key=CCE3RKDibsEi3Uix1-9R
 
-    /** GET heroes from the server */
+    /** GET stock from the server */
     getStockPrice (stockId): Observable<Stock[]> {
       console.log("getStockPrice() called");
            let URL = "https://www.quandl.com/api/v3/datasets/WIKI/" + stockId 
-     + "/data.json?column_index=4&rows=1&" + this.api_key;
+     + "/data.json?column_index=4&rows=1&api_key=" + this.api_key;
       return this.http.get<Stock[]>(URL)
         .pipe(
           tap(heroes => this.log(`fetched stock data`)),
@@ -40,10 +40,18 @@ export class StockService {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
+      console.error(error.status); // log to console instead
+
+      if(error.status == "404"){
+        alert("This search returned no results. Please double check your input.");
+      }
+
+      if(error.status == "429"){
+        alert("ERROR 429: There are too many requests being sent to the server.");
+      }
 
       // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
+     // this.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
@@ -55,25 +63,3 @@ export class StockService {
       console.log(message);
     }
   }
-
-  // getStockPrice(stockId) {
-  //   let URL = "https://www.quandl.com/api/v3/datasets/WIKI/" + stockId 
-  //   + "/data.json?column_index=4&rows=1&" + this.api_key;
-  //   return this.http.get(URL.map(res => res.json()));
-  //       }
-
-  // getStockPrice(stockId) {
-  //   let URL = "https://www.quandl.com/api/v3/datasets/WIKI/" + stockId 
-  //   + "/data.json?column_index=4&rows=1&" + this.api_key;
-  //   return new Promise((resolve, reject) => {
-  //     this.http.get(URL)
-  //         .pipe(map(res => res.json()))
-  //         .subscribe(data => {
-  //             // console.log(data)
-  //            resolve(data);
-  //          }, (error => {
-  //             reject(error);
-  //           }));
-  //        });
-  //       }
-    }

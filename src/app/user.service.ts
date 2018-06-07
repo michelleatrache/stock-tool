@@ -31,4 +31,14 @@ export class UserService {
     this.balance = this.balance - val;
     this.saveBalance();
   }
+
+  buyStocks(stock_id, stock_price, num_stocks){
+    let cost = stock_price * num_stocks;
+    if(cost > this.balance){
+      alert("You do not have the funds to make this purchase.");
+    }
+    else{
+      this.subtract(cost);
+    }
+  }
 }

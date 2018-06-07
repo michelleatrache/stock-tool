@@ -10,20 +10,31 @@ import { StockService }      from '../stock.service';
 export class StockSearchComponent {
   balance: number;
   x: string;
+  stockPrice: string;
+  stockName: string;
+  buyAmount: number;
 
   constructor(private userService: UserService, private stockService: StockService) { }
 
   ngOnInit() {
     this.updateBalance();
+    // TODO: CHANGE BACK TO NULL
+    this.stockPrice = null;
+    this.stockName = null;
+    console.log(this.stockPrice);
   }
 
   updateBalance(){
     this.balance = this.userService.getBalance();
   }
 
+  buyStocks(){
+    this.userService.buyStocks(this.stockName, this.stockPrice, this.buyAmount);
+    this.updateBalance();
+  }
+
   search(stock_id){
-    console.log(stock_id);
-  //  this.stockService.getStockPrice(stock_id);
+    this.stockName = stock_id;
 
   this.stockService.getStockPrice(stock_id).subscribe(
     data=>{
@@ -32,14 +43,14 @@ export class StockSearchComponent {
 
       let obj = JSON.parse(this.x);
 
-      let stockPrice = obj.dataset_data.data[0][1];
+      this.stockPrice = obj.dataset_data.data[0][1];
       console.log(obj);
-      console.log("stockPrice: " + stockPrice);
+      console.log("stockPrice: " + this.stockPrice);
 
-      
-      // Call function on data to parse the JSON
     }
   );
+
+
   }
   
 
