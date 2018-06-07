@@ -27,7 +27,7 @@ export class DashboardComponent {
   }
 
   subtractBalance(){
-    this.balance = this.balance - this.updateAmount;
+    this.userService.subtract(this.updateAmount);
     this.updateBalance();
   }
 }
