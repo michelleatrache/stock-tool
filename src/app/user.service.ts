@@ -46,17 +46,65 @@ export class UserService {
     this.saveBalance();
   }
 
+  // Return the owned stock with stock_id
+  getStock(stock_id){
+    for(let i=0; i<this.ownedStocks.length; i++){
+      if(this.ownedStocks[i].id == stock_id){
+        return this.ownedStocks[i];
+      }
+    }
+  }
+
   buyStocks(stock_id, stock_price, num_stocks){
     let cost = stock_price * num_stocks;
     if(cost > this.balance){
       alert("You do not have the funds to make this purchase.");
     }
     else{
+      let found = false;
+      // Check if user already owns stocks of stock_id
+      for(let i=0; i<this.ownedStocks.length; i++){
+        if(this.ownedStocks[i].id == stock_id){
+          // Then we own this already. So increment its number of shares
+          this.ownedStocks[i].amountOwned += num_stocks;
+          found = true;
+        }
+      }
+      if(!found){
+        // user doesn't own this stock, so create it
+        let boughtStock = new Stock(stock_id, stock_price, num_stocks);
+        this.ownedStocks.push(boughtStock);
+      }
       this.subtract(cost);
-      let boughtStock = new Stock(stock_id, stock_price, num_stocks);
-      console.log(boughtStock);
-      this.ownedStocks.push(boughtStock);
       this.saveOwnedStocks();
     }
+  }
+
+  sellShares(stock_id, num_shares){
+    for(let i=0; i<this.ownedStocks.length; i++){
+      let curStock = this.ownedStocks[i];
+      if(curStock.id == stock_id){
+        // Determine how much money is gained
+        let moneyGained = num_shares * parseInt(curStock.price);
+
+        let newAmountOwned = parseInt(curStock.amountOwned) - num_shares;
+        if(newAmountOwned < 0){
+          alert("You are trying to sell more shares than you own. Please try again.");
+        } 
+        else if(newAmountOwned == 0){
+          // Then no shares remain. Let's delete this object from the array
+          delete this.ownedStocks[i];
+          this.add(moneyGained);
+        }
+        else{
+          // Decrement number of shares owned for this stock
+          curStock.amountOwned = String(newAmountOwned);
+          this.add(moneyGained);
+        }
+
+      }
+    }
+
+    this.saveOwnedStocks();
   }
 }

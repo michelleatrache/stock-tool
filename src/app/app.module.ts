@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { StockSearchComponent } from './stock-search/stock-search.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { StockDetailComponent } from './stock-detail/stock-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StockSearchComponent,
-    DashboardComponent
+    DashboardComponent,
+    StockDetailComponent
   ],
   imports: [
     BrowserModule,

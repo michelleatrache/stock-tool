@@ -6,6 +6,9 @@
 <ul class="list-group">
     <div [hidden]="this.ownedStocks == null">Your owned stocks:</div>
     <li *ngFor="let stock of this.ownedStocks">
-        <span class="list-group-item">{{stock.id}} with {{stock.amountOwned}} shares at ${{stock.price}} a share</span>
+        <span class="list-group-item"></span>
+        <a routerLink="/detail/{{stock.id}}">
+            {{stock.id}} with {{stock.amountOwned}} shares at ${{stock.price}} a share
+          </a>
     </li>
 </ul>

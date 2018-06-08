@@ -7,9 +7,9 @@
 
 
   <div [hidden]="this.stockPrice == null">
-    <h2>The stock price for {{this.stockName}} is {{this.stockPrice}}</h2>
-    <h4> How many stocks would you like to buy? </h4>
+    <h2>The share price for {{this.stockName}} is {{this.stockPrice}}</h2>
+    <h4> How many shares would you like to buy? </h4>
     <input type="number" [(ngModel)]='this.buyAmount'/>
-    <button (click)="buyStocks()">Buy Stock(s)</button>
+    <button (click)="buyStocks()">Buy Share(s)</button>
   </div>
 </div>

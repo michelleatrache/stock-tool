@@ -11,6 +11,7 @@ export class DashboardComponent {
   balance: number;
   updateAmount: number = 0;
   ownedStocks:Array<Stock> = [];
+  sellAmount: number = 0;
 
   constructor(private userService: UserService) { 
   }
@@ -35,6 +36,11 @@ export class DashboardComponent {
 
   subtractBalance(){
     this.userService.subtract(this.updateAmount);
+    this.updateBalance();
+  }
+
+  sellShare(stockId){
+    this.userService.sellShares(stockId, this.sellAmount);
     this.updateBalance();
   }
 }

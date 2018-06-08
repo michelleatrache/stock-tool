@@ -1,0 +1,10 @@
+<div class="stock-detail">
+    <h2>{{ this.stockId | uppercase }} Details</h2>
+    <div><span>Number shares owned: </span>{{this.amountOwned}}</div>
+    <div><span>Price per share: </span>{{this.price}}</div>
+    <h3>How many shares of this stock would you like to sell?</h3>
+    <input type="number" [(ngModel)]='this.sellAmount'/>
+    <button (click)="sellShares()">Sell Share(s)</button>
+  or
+    <button routerLink="/dashboard" >Go Back to Dashboard</button>
+  </div>
