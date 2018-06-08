@@ -13,12 +13,12 @@
     text-align: center;
 }
 
-.search-result li:hover {
+li:hover {
     background-color: #607D8B;
   }
   
-  .search-result li a {
-    color: #888;
+li a {
+    color: #000000;
     display: block;
     text-decoration: none;
   }
@@ -26,3 +26,8 @@
 ul {
     float: left;
 }
+
+a:hover {
+    color: #039be5;
+    background-color: #CFD8DC;
+  }
