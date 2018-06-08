@@ -18,39 +18,35 @@ export class StockSearchComponent {
 
   ngOnInit() {
     this.updateBalance();
-    // TODO: CHANGE BACK TO NULL
     this.stockPrice = null;
     this.stockName = null;
-    console.log(this.stockPrice);
   }
 
+  // To persist previous balance on refresh
   updateBalance(){
     this.balance = this.userService.getBalance();
   }
 
+  // Buy {this.buyAmount} shares of stock {this.stockName}
   buyStocks(){
     this.userService.buyStocks(this.stockName, this.stockPrice, this.buyAmount);
     this.updateBalance();
   }
 
+  // Call API to search for stock_id JSON data.
   search(stock_id){
     this.stockName = stock_id;
 
-  this.stockService.getStockPrice(stock_id).subscribe(
-    data=>{
-      this.x = JSON.stringify(data);
-     // console.log(data);
+    this.stockService.getStockPrice(stock_id).subscribe(
+      data=>{
+        this.x = JSON.stringify(data);
 
-      let obj = JSON.parse(this.x);
+        let obj = JSON.parse(this.x);
 
-      this.stockPrice = obj.dataset_data.data[0][1];
-      console.log(obj);
-      console.log("stockPrice: " + this.stockPrice);
-
-    }
-  );
-
-
+        // This specific index of the returned JSON contains most recent stock price
+        this.stockPrice = obj.dataset_data.data[0][1];
+      }
+    );
   }
   
 

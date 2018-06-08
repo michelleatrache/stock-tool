@@ -4,6 +4,7 @@ import { StockSearchComponent }      from './stock-search/stock-search.component
 import { DashboardComponent }   from './dashboard/dashboard.component';
 import { StockDetailComponent }   from './stock-detail/stock-detail.component';
 
+// Define our route paths 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },

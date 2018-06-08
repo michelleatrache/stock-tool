@@ -16,10 +16,10 @@ export class StockService {
 
   constructor(private http: HttpClient) { }
 
-    // To get most recent stock price
+  // (For reference): To get most recent stock price of FB stock:
   //https://www.quandl.com/api/v3/datasets/WIKI/FB/data.json?column_index=4&rows=1&api_key=CCE3RKDibsEi3Uix1-9R
 
-    /** GET stock from the server */
+    /** GET stock data from the server */
     getStockPrice (stockId): Observable<Stock[]> {
       console.log("getStockPrice() called");
            let URL = "https://www.quandl.com/api/v3/datasets/WIKI/" + stockId 
@@ -31,7 +31,7 @@ export class StockService {
         );
     }
 
-     /**
+  /**
    * Handle failed HTTP operation
    * Let the app continue despite this
    * @param operation - name of the operation that failed
@@ -56,7 +56,7 @@ export class StockService {
     };
   }
 
-    private log(message: string) {
+  private log(message: string) {
       console.log(message);
     }
   }

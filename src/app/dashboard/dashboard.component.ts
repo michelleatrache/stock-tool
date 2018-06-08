@@ -8,14 +8,13 @@ import { Stock } from '../../stock';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  balance: number;
-  updateAmount: number = 0;
+  balance: number = 0;
+  updateAmount: number;
   ownedStocks:Array<Stock> = [];
   sellAmount: number = 0;
   netAssets: number = 0;
 
-  constructor(private userService: UserService) { 
-  }
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
     this.updateBalance();
@@ -23,6 +22,7 @@ export class DashboardComponent {
     this.updateNetAssets();
   }
 
+  // Update the values from the shared service so we can persist on refresh
   updateNetAssets(){
     this.netAssets = this.userService.getNetAssets();
   }
@@ -35,16 +35,29 @@ export class DashboardComponent {
     this.ownedStocks = this.userService.getOwnedStocks();
   }
 
+  // Increase user's balance by this.updateAmount
   addBalance(){
-    this.userService.add(this.updateAmount);
-    this.updateBalance();
+    if(this.updateAmount == null){
+      alert("Please input a real number to increment your balance by.");
+    }
+    else{
+      this.userService.add(this.updateAmount);
+      this.updateBalance();
+    }
   }
 
+  // Decrease user's balance by this.updateAmount
   subtractBalance(){
-    this.userService.subtract(this.updateAmount);
-    this.updateBalance();
+    if(this.updateAmount == null){
+      alert("Please input a real number to decrement your balance by.");
+    }
+    else{
+      this.userService.subtract(this.updateAmount);
+      this.updateBalance();
+    }  
   }
 
+  // Sell {this.sellAmount} shares of stock {stockId}
   sellShare(stockId){
     this.userService.sellShares(stockId, this.sellAmount);
     this.updateBalance();

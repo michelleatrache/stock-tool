@@ -28,19 +28,23 @@ export class UserService {
     return this.balance;
   }
 
+  // Save user balance across browser sessions
   saveBalance() {
     localStorage.setItem('balance', String(this.balance));
   }
 
+  // Save user's owned stocks across browser sessions
   saveOwnedStocks() {
     localStorage.setItem('ownedStocks', JSON.stringify(this.ownedStocks));
   }
 
+  // Add val to the current user balance
   add(val) {
     this.balance = this.balance + val;
     this.saveBalance();
   }
 
+  // Subtract val from the current user balance
   subtract(val) {
     this.balance = this.balance - val;
     this.saveBalance();
@@ -60,11 +64,12 @@ export class UserService {
     let netAssets = 0;
     for (let i = 0; i < this.ownedStocks.length; i++) {
       let curStock = this.ownedStocks[i];
-      netAssets += parseInt(curStock.amountOwned) * parseInt(curStock.price);
+      netAssets += (parseInt(curStock.amountOwned) * parseInt(curStock.price));
     }
     return netAssets;
   }
 
+  // Buy {num_stocks} of {stock_id} for ${stock_price} per share
   buyStocks(stock_id, stock_price, num_stocks) {
     let cost = stock_price * num_stocks;
     if (cost > this.balance) {
@@ -90,6 +95,7 @@ export class UserService {
     }
   }
 
+  // Sell {num_shares} shares of stock {stock_id}
   sellShares(stock_id, num_shares) {
     for (let i = 0; i < this.ownedStocks.length; i++) {
       let curStock = this.ownedStocks[i];
@@ -114,7 +120,6 @@ export class UserService {
       }
     }
   }
-
     this.saveOwnedStocks();
   }
 }

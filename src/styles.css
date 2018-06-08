@@ -16,3 +16,9 @@ a {
     cursor: pointer;
 }
 
+body {
+    max-width: 500px;
+    margin: auto;
+    vertical-align: middle;
+}
+

@@ -2,7 +2,6 @@ nav a {
     padding: 7px 12px;
     text-decoration: none;
     margin-top: 10px;
-    margin-left: 10px;
     display: inline-block;
     background-color: #eee;
     border-radius: 4px;
@@ -13,9 +12,6 @@ nav a {
   nav a:hover {
     color: #039be5;
     background-color: #CFD8DC;
-  }
-  nav a.active {
-    color: #039be5;
   }
 
   h1 {
