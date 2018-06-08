@@ -62,6 +62,7 @@ export class UserService {
   // Return the total net assets based on current stock prices
   getNetAssets(){
     let netAssets = 0;
+    console.log("array len: " + this.ownedStocks.length);
     for (let i = 0; i < this.ownedStocks.length; i++) {
       let curStock = this.ownedStocks[i];
       netAssets += (parseInt(curStock.amountOwned) * parseInt(curStock.price));
@@ -115,7 +116,7 @@ export class UserService {
         }
         else {
         // Then no shares remain. Let's delete this object from the array
-        delete this.ownedStocks[i];
+        this.ownedStocks.splice(this.ownedStocks.indexOf(curStock), 1);
         this.add(moneyGained);
       }
     }

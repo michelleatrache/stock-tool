@@ -8,7 +8,7 @@ import { Stock } from '../../stock';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  balance: number = 0;
+  balance: number;
   updateAmount: number;
   ownedStocks:Array<Stock> = [];
   sellAmount: number = 0;
