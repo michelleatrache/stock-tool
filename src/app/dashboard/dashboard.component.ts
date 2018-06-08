@@ -12,6 +12,7 @@ export class DashboardComponent {
   updateAmount: number = 0;
   ownedStocks:Array<Stock> = [];
   sellAmount: number = 0;
+  netAssets: number = 0;
 
   constructor(private userService: UserService) { 
   }
@@ -19,6 +20,11 @@ export class DashboardComponent {
   ngOnInit() {
     this.updateBalance();
     this.updateOwnedStocks();
+    this.updateNetAssets();
+  }
+
+  updateNetAssets(){
+    this.netAssets = this.userService.getNetAssets();
   }
 
   updateBalance(){

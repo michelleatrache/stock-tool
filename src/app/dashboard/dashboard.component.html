@@ -1,14 +1,17 @@
 <h3>Your cash balance: ${{this.balance}}</h3>
+<h3>Your net total assets based on stock prices: ${{this.netAssets}}</h3>
 <input type="number" [(ngModel)]='this.updateAmount'/>
 <button (click)="addBalance()">Add to Balance</button>
 <button (click)="subtractBalance()">Subtract from Balance</button>
 
 <ul class="list-group">
-    <div [hidden]="this.ownedStocks == null">Your owned stocks:</div>
+    <div [hidden]="this.ownedStocks == null">
+        Below are your owned stocks. Click one to view that stock's detail page.
+    </div>
     <li *ngFor="let stock of this.ownedStocks">
         <span class="list-group-item"></span>
         <a routerLink="/detail/{{stock.id}}">
-            {{stock.id}} with {{stock.amountOwned}} shares at ${{stock.price}} a share
+            {{stock.id | uppercase}} with {{stock.amountOwned}} shares at ${{stock.price}} a share
           </a>
     </li>
 </ul>

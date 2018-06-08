@@ -1,5 +1,5 @@
 <div id="search-component">
-  <h3>Your cash balance: {{this.balance}}</h3>
+  <h3>Your cash balance: ${{this.balance}}</h3>
   <h3>Stock Search</h3>
 
   <input #searchBox id="search-box" />
@@ -7,7 +7,7 @@
 
 
   <div [hidden]="this.stockPrice == null">
-    <h2>The share price for {{this.stockName}} is {{this.stockPrice}}</h2>
+    <h2>The share price for {{this.stockName | uppercase}} is ${{this.stockPrice}} USD</h2>
     <h4> How many shares would you like to buy? </h4>
     <input type="number" [(ngModel)]='this.buyAmount'/>
     <button (click)="buyStocks()">Buy Share(s)</button>

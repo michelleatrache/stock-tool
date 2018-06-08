@@ -6,21 +6,21 @@ import { Stock } from '../stock';
 })
 export class UserService {
   balance = 0;
-  ownedStocks:Array<Stock> = [];
+  ownedStocks: Array<Stock> = [];
 
   constructor() {
     this.balance = parseInt(localStorage.getItem('balance'));
     this.ownedStocks = JSON.parse(localStorage.getItem('ownedStocks') || '[]');
-    if(this.ownedStocks == null){
+    if (this.ownedStocks == null) {
       this.ownedStocks = [];
     }
     console.log(this.ownedStocks);
-    if(isNaN(this.balance)){
+    if (isNaN(this.balance)) {
       this.balance = 0;
     }
   }
 
-  getOwnedStocks(){
+  getOwnedStocks() {
     return this.ownedStocks;
   }
 
@@ -28,49 +28,59 @@ export class UserService {
     return this.balance;
   }
 
-  saveBalance(){
+  saveBalance() {
     localStorage.setItem('balance', String(this.balance));
   }
 
-  saveOwnedStocks(){
+  saveOwnedStocks() {
     localStorage.setItem('ownedStocks', JSON.stringify(this.ownedStocks));
   }
- 
+
   add(val) {
     this.balance = this.balance + val;
     this.saveBalance();
   }
-  
+
   subtract(val) {
     this.balance = this.balance - val;
     this.saveBalance();
   }
 
   // Return the owned stock with stock_id
-  getStock(stock_id){
-    for(let i=0; i<this.ownedStocks.length; i++){
-      if(this.ownedStocks[i].id == stock_id){
+  getStock(stock_id) {
+    for (let i = 0; i < this.ownedStocks.length; i++) {
+      if (this.ownedStocks[i].id == stock_id) {
         return this.ownedStocks[i];
       }
     }
   }
 
-  buyStocks(stock_id, stock_price, num_stocks){
+  // Return the total net assets based on current stock prices
+  getNetAssets(){
+    let netAssets = 0;
+    for (let i = 0; i < this.ownedStocks.length; i++) {
+      let curStock = this.ownedStocks[i];
+      netAssets += parseInt(curStock.amountOwned) * parseInt(curStock.price);
+    }
+    return netAssets;
+  }
+
+  buyStocks(stock_id, stock_price, num_stocks) {
     let cost = stock_price * num_stocks;
-    if(cost > this.balance){
+    if (cost > this.balance) {
       alert("You do not have the funds to make this purchase.");
     }
-    else{
+    else {
       let found = false;
       // Check if user already owns stocks of stock_id
-      for(let i=0; i<this.ownedStocks.length; i++){
-        if(this.ownedStocks[i].id == stock_id){
+      for (let i = 0; i < this.ownedStocks.length; i++) {
+        if (this.ownedStocks[i].id == stock_id) {
           // Then we own this already. So increment its number of shares
           this.ownedStocks[i].amountOwned += num_stocks;
           found = true;
         }
       }
-      if(!found){
+      if (!found) {
         // user doesn't own this stock, so create it
         let boughtStock = new Stock(stock_id, stock_price, num_stocks);
         this.ownedStocks.push(boughtStock);
@@ -80,30 +90,30 @@ export class UserService {
     }
   }
 
-  sellShares(stock_id, num_shares){
-    for(let i=0; i<this.ownedStocks.length; i++){
+  sellShares(stock_id, num_shares) {
+    for (let i = 0; i < this.ownedStocks.length; i++) {
       let curStock = this.ownedStocks[i];
-      if(curStock.id == stock_id){
+      if (curStock.id == stock_id) {
         // Determine how much money is gained
         let moneyGained = num_shares * parseInt(curStock.price);
 
         let newAmountOwned = parseInt(curStock.amountOwned) - num_shares;
-        if(newAmountOwned < 0){
+        if (newAmountOwned < 0) {
           alert("You are trying to sell more shares than you own. Please try again.");
-        } 
-        else if(newAmountOwned == 0){
-          // Then no shares remain. Let's delete this object from the array
-          delete this.ownedStocks[i];
-          this.add(moneyGained);
         }
-        else{
+        else if (newAmountOwned > 0) {
           // Decrement number of shares owned for this stock
           curStock.amountOwned = String(newAmountOwned);
           this.add(moneyGained);
-        }
 
+        }
+        else {
+        // Then no shares remain. Let's delete this object from the array
+        delete this.ownedStocks[i];
+        this.add(moneyGained);
       }
     }
+  }
 
     this.saveOwnedStocks();
   }
