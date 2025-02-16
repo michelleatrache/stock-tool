@@ -1,0 +1,21 @@
+{
+  "name": "stock-tool",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "build": "cd client && npm install && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "proxy": "http://localhost:3001",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "engines": {
+    "node": "v22.13.1"
+  }
+}
