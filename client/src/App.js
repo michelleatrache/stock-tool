@@ -14,13 +14,12 @@ const App = () => {
 
     return (
         <div>
-            <h1>Top 10 Stocks</h1>
+            <h1>Top Stocks</h1>
             <ul>
                 {stocks.map((stock, index) => (
                     <li key={index}>{stock.ticker} - {stock.price}</li>
                 ))}
             </ul>
-            <h1>Top 10 Gaining Stocks</h1>
             <StockTable />
         </div>
     );

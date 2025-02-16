@@ -21,28 +21,32 @@ const StockTable = () => {
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p style={{ color: "red" }}>{error}</p>;
-
+    console.log("Stocks data:", stocks);
     return (
         <table border="1" cellPadding="10" cellSpacing="0">
             <thead>
                 <tr>
                     <th>Rank</th>
                     <th>Symbol</th>
-                    <th>Company</th>
                     <th>Price</th>
                     <th>Change (%)</th>
+                    <th>Change Amount</th>
+                    <th>Volume</th>
                 </tr>
             </thead>
             <tbody>
                 {stocks.map((stock, index) => (
                     <tr key={stock.symbol}>
                         <td>{index + 1}</td>
-                        <td>{stock.symbol}</td>
-                        <td>{stock.name}</td>
+                        <td>{stock.ticker}</td>
                         <td>${stock.price}</td>
-                        <td style={{ color: stock.change_percent > 0 ? "green" : "red" }}>
-                            {stock.change_percent}%
+                        <td style={{ color: "green" }}>
+                            {stock.change_percentage}
                         </td>
+                        <td style={{ color: "green" }}>
+                            {stock.change_amount}
+                        </td>
+                        <td>{stock.volume}</td>
                     </tr>
                 ))}
             </tbody>
