@@ -1,8 +1,12 @@
 {
+  "name": "stock-tool",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "concurrently \"npm start --prefix server\" \"npm start --prefix client\"",
+    "install-all": "npm install --prefix server && npm install --prefix client"
+  },
   "dependencies": {
-    "axios": "^1.7.9",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2"
+    "concurrently": "^8.2.0"
   }
 }

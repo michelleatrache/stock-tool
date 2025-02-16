@@ -1,7 +1,7 @@
 require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const axios = require('axios');
+import express from 'express';
+import cors from 'cors';
+import axios from 'axios';
 
 const app = express();
 const PORT = 3001;
@@ -12,7 +12,7 @@ app.use(cors());
 // API Route to fetch top stocks
 app.get('/api/top-stocks', async (req, res) => {
     try {
-        const response = await axios.get('https://www.alphavantage.co/query', {
+        const response = await get('https://www.alphavantage.co/query', {
             params: {
                 function: 'TOP_GAINERS_LOSERS',
                 apikey: process.env.ALPHA_VANTAGE_API_KEY

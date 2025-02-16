@@ -1,3 +1,5 @@
+import React from "react";
+import StockTable from "./StockTable";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -18,6 +20,8 @@ const App = () => {
                     <li key={index}>{stock.ticker} - {stock.price}</li>
                 ))}
             </ul>
+            <h1>Top 10 Gaining Stocks</h1>
+            <StockTable />
         </div>
     );
 };
